@@ -12,9 +12,7 @@
 #define SYMBOL 1
 #define SYSTEM 2
 
-#define DUMMY 0
-
-#define SYM_RET &htd_sym_ret SYMBOL DUMMY
+#define RET_SYM(layer) &htd_ret_sym layer 0
 
 / {
 	behaviors {
@@ -24,7 +22,7 @@
 			tapping-term-ms = <200>;
 			bindings = <&kp RET>, <&tog SYMBOL>;
 		};
-		htd_sym_ret: htd_sym_ret {
+		htd_ret_sym: htd_ret_sym {
 			compatible = "zmk,behavior-hold-tap";
 			#binding-cells = <2>;
 			tapping-term-ms = <200>;
@@ -52,7 +50,7 @@
    &kp TAB        &kp Q &kp W &kp E &kp R &kp T     &kp Y &kp U  &kp I     &kp O   &kp P    &mt RSHFT PIPE
    &mt LCTRL ESC  &kp A &kp S &kp D &kp F &kp G     &kp H &kp J  &kp K     &kp L   &kp SEMI &mt RCTRL SQT
    &mt LALT GRAVE &kp Z &kp X &kp C &kp V &kp B     &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RALT
-             &mo SYSTEM &mt LCMD BSPC &td_upper     &kp SPACE SYM_RET &kp RCMD
+             &mo SYSTEM &mt LCMD BSPC &td_upper     &kp SPACE RET_SYM(SYMBOL) &kp RCMD
                         >;
                 };
 
@@ -67,7 +65,7 @@
    &trans &kp N1    &kp N2   &kp N3   &kp N4   &kp N5        &kp N6    &kp N7   &kp N8    &kp N9    &kp N0   &trans
    &trans &kp TILDE &kp LBRC &kp LBKT &kp LPAR &kp UNDER     &kp EQUAL &kp RPAR &kp RBKT  &kp RBRC  &kp BSLH &trans
    &trans &kp EXCL  &kp AT   &kp HASH &kp DLLR &kp PRCNT     &kp CARET &kp AMPS &kp ASTRK &kp MINUS &kp PLUS &trans
-                                     &none &trans &trans     &trans &tog SYMBOL &trans
+                                     &none &trans &trans     &trans &trans &trans
                         >;
                 };
 
