@@ -42,15 +42,15 @@
                 default_layer {
 			display-name = "Base";
 // -----------------------------------------------------------------------------------------
-// |    TAB   |  Q  |  W  |  E  |  R  |  T  |||  Y  |  U  |  I  |  O  |  P  | SHFT/"|" |
-// | CTRL/ESC |  A  |  S  |  D  |  F  |  G  |||  H  |  J  |  K  |  L  |  ;  |  CTRL/'  |
-// |   ALT/`  |  Z  |  X  |  C  |  V  |  B  |||  N  |  M  |  ,  |  .  |  /  |    ALT   |
-//               | SYSTEM | CMD | SHFT/CAPS ||| SPC | SYMBOL/RET | BSPC |
+// |    TAB   |  Q  |  W  |  E  |  R  |  T  |||  Y  |  U  |  I  |  O  |  P  |   BSPC  |
+// | CTRL/ESC |  A  |  S  |  D  |  F  |  G  |||  H  |  J  |  K  |  L  |  ;  |  CTRL/' |
+// |   ALT/`  |  Z  |  X  |  C  |  V  |  B  |||  N  |  M  |  ,  |  .  |  /  | ALT/"|" |
+//               | SYSTEM | CMD | SHFT/CAPS ||| SPC | SYMBOL/RET | CMD |
                         bindings = <
-   &kp TAB        &kp Q &kp W &kp E &kp R &kp T     &kp Y &kp U  &kp I     &kp O   &kp P    &mt RSHFT PIPE
+   &kp TAB        &kp Q &kp W &kp E &kp R &kp T     &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
    &mt LCTRL ESC  &kp A &kp S &kp D &kp F &kp G     &kp H &kp J  &kp K     &kp L   &kp SEMI &mt RCTRL SQT
-   &mt LALT GRAVE &kp Z &kp X &kp C &kp V &kp B     &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RALT
-                  &mo SYSTEM &kp LCMD &td_upper     &kp SPACE RET_SYM(SYMBOL) &kp BSPC
+   &mt LALT GRAVE &kp Z &kp X &kp C &kp V &kp B     &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &mt RALT PIPE
+                  &mo SYSTEM &kp LCMD &td_upper     &kp SPACE RET_SYM(SYMBOL) &kp RCMD
                         >;
                 };
 
