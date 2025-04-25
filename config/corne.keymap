@@ -19,14 +19,14 @@
 		td_ret_sym: td_ret_sym {
 			compatible = "zmk,behavior-tap-dance";
 			#binding-cells = <0>;
-			tapping-term-ms = <200>;
+			tapping-term-ms = <100>;
 			bindings = <&kp RET>, <&tog SYMBOL>;
 		};
 		htd_ret_sym: htd_ret_sym {
 			compatible = "zmk,behavior-hold-tap";
 			#binding-cells = <2>;
-			tapping-term-ms = <200>;
-			quick-tap-ms = <200>;
+			tapping-term-ms = <100>;
+			quick-tap-ms = <100>;
 			bindings = <&mo>, <&td_ret_sym>;
 		};
 		td_upper: td_upper {
