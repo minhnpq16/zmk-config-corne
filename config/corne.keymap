@@ -75,12 +75,12 @@
 // |  F12  |  F1  |  F2  |  F3  | F4  |  F5  |||  F6  |  F7   |   F8  |  F8  |  F10 |  F11  |
 // | BTCLR |  BT1 |  BT2 |  BT3 | BT4 |  BT5 |||  LFT |  DWN  |   UP  |  RGT | none | PSCRN |
 // |  none | none | none | HOME | END | none ||| none | PG_UP | PG_DN | none | none |  none |
-//                      | none | none | none ||| sys_reset | bootloader | none |
+//           | none | bootloader | sys_reset ||| sys_reset | bootloader | none |
                         bindings = <
    &kp F12     &kp F1       &kp F2       &kp F3       &kp F4       &kp F5           &kp F6   &kp F7    &kp F8    &kp F9    &kp F10 &kp F11
    &bt BT_CLR  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none   &kp PSCRN
    &kp LSHFT   &none        &none        &kp HOME     &kp END      &none            &none    &kp PG_UP &kp PG_DN &none     &none   &none
-                                                              &none &none &none     &sys_reset &bootloader  &none
+                                                   &none &bootloader &sys_reset     &sys_reset &bootloader  &none
                         >;
                 };
 
