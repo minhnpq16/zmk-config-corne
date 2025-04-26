@@ -57,13 +57,13 @@
                 symbol_layer {
 			display-name = "Symbol";
 // -----------------------------------------------------------------------------------------
-// |     |  !  |  @  |  #  |  $  |  %  |||  ^  |  &  |  *  |  -  |  +  |     |
-// |     |  ~  |  {  |  [  |  (  |  _  |||  =  |  )  |  ]  |  }  |  \  |     |
+// |     |  !  |  @  |  #  |  $  |  %  |||  ^  |  &  |  *  |  ~  |  \  |     |
+// |     |  -  |  {  |  [  |  (  |  _  |||  =  |  )  |  ]  |  }  |  +  |     |
 // |     |  1  |  2  |  3  |  4  |  5  |||  6  |  7  |  8  |  9  |  0  |     |
 //                  | none |     |     |||     |     |     |
                         bindings = <
-   &trans &kp EXCL  &kp AT   &kp HASH &kp DLLR &kp PRCNT     &kp CARET &kp AMPS &kp ASTRK &kp MINUS &kp PLUS &trans
-   &trans &kp TILDE &kp LBRC &kp LBKT &kp LPAR &kp UNDER     &kp EQUAL &kp RPAR &kp RBKT  &kp RBRC  &kp BSLH &trans
+   &trans &kp EXCL  &kp AT   &kp HASH &kp DLLR &kp PRCNT     &kp CARET &kp AMPS &kp ASTRK &kp TILDE &kp BSLH &trans
+   &trans &kp MINUS &kp LBRC &kp LBKT &kp LPAR &kp UNDER     &kp EQUAL &kp RPAR &kp RBKT  &kp RBRC  &kp PLUS &trans
    &trans &kp N1    &kp N2   &kp N3   &kp N4   &kp N5        &kp N6    &kp N7   &kp N8    &kp N9    &kp N0   &trans
                                      &none &trans &trans     &trans &trans &trans
                         >;
