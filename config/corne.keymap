@@ -19,7 +19,7 @@
 		td_ret_sym: td_ret_sym {
 			compatible = "zmk,behavior-tap-dance";
 			#binding-cells = <0>;
-			tapping-term-ms = <100>;
+			tapping-term-ms = <200>;
 			bindings = <&kp RET>, <&tog SYM>;
 		};
 		htd_ret_sym: htd_ret_sym {
