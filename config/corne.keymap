@@ -12,28 +12,30 @@
 #define SYM 1
 #define SYS 2
 
-#define RET_SYM(layer) &htd_ret_sym layer 0
+&lt {
+    quick-tap-ms = <200>;
+};
+
+&mt {
+    quick-tap-ms = <200>;
+};
+
+#define MO_TOG(layer) &mo_tog layer layer
 
 / {
 	behaviors {
-		td_ret_sym: td_ret_sym {
-			compatible = "zmk,behavior-tap-dance";
-			#binding-cells = <0>;
-			tapping-term-ms = <200>;
-			bindings = <&kp RET>, <&tog SYM>;
-		};
-		htd_ret_sym: htd_ret_sym {
-			compatible = "zmk,behavior-hold-tap";
-			#binding-cells = <2>;
-			tapping-term-ms = <200>;
-			quick-tap-ms = <200>;
-			bindings = <&mo>, <&td_ret_sym>;
-		};
 		td_upper: td_upper {
 			compatible = "zmk,behavior-tap-dance";
 			#binding-cells = <0>;
 			tapping-term-ms = <200>;
 			bindings = <&kp LSHFT>, <&kp CAPS>;
+		};
+		mo_tog: behavior_mo_tog {
+			compatible = "zmk,behavior-hold-tap";
+			#binding-cells = <2>;
+			flavor = "hold-preferred";
+			tapping-term-ms = <200>;
+			bindings = <&mo>, <&tog>;
 		};
 	};
         keymap {
@@ -42,15 +44,15 @@
                 default_layer {
 			display-name = "Base";
 // -----------------------------------------------------------------------------------------
-// |    TAB   |  Q  |  W  |  E  |  R  |  T  |||  Y  |  U  |  I  |  O  |  P  |   BSPC  |
-// | CTRL/ESC |  A  |  S  |  D  |  F  |  G  |||  H  |  J  |  K  |  L  |  ;  |  CTRL/' |
-// |   SYS/`  |  Z  |  X  |  C  |  V  |  B  |||  N  |  M  |  ,  |  .  |  /  | SHFT/"|" |
-//                  | CMD | ALT | SHFT/CAPS ||| SYM/RET | SPC | CMD |
+// |    TAB   |  Q  |  W  |  E  |  R  |  T  |||  Y  |  U  |  I  |  O  |  P  |    BSPC  |
+// | CTRL/ESC |  A  |  S  |  D  |  F  |  G  |||  H  |  J  |  K  |  L  |  ;  |  CTRL/'  |
+// |   SYS/`  |  Z  |  X  |  C  |  V  |  B  |||  N  |  M  |  ,  |  .  |  /  | SHFT/RET |
+//                  | CMD | ALT | SHFT/CAPS ||| CMD/SPC | SYM | ALT |
                         bindings = <
    &kp TAB        &kp Q &kp W &kp E &kp R &kp T     &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
    &mt LCTRL ESC  &kp A &kp S &kp D &kp F &kp G     &kp H &kp J  &kp K     &kp L   &kp SEMI &mt RCTRL SQT
-   &lt SYS GRAVE  &kp Z &kp X &kp C &kp V &kp B     &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &mt RSHFT PIPE
-                    &kp LCMD &kp LALT &td_upper     RET_SYM(SYM) &kp SPACE &kp RCMD
+   &lt SYS GRAVE  &kp Z &kp X &kp C &kp V &kp B     &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &mt RSHFT RET
+                    &kp LCMD &kp LALT &td_upper     &mt RCMD SPACE MO_TOG(SYM) &kp RALT
                         >;
                 };
 
@@ -58,12 +60,12 @@
 			display-name = "Symbol";
 // -----------------------------------------------------------------------------------------
 // |     |  !  |  @  |  #  |  $  |  %  |||  ^  |  &  |  *  |  ~  |  \  |     |
-// |     |  -  |  {  |  [  |  (  |  _  |||  =  |  )  |  ]  |  }  |  +  |     |
+// |     |  -  |  {  |  [  |  (  |  _  |||  =  |  )  |  ]  |  }  |  +  | "|" |
 // |     |  1  |  2  |  3  |  4  |  5  |||  6  |  7  |  8  |  9  |  0  |     |
 //                  | none |     |     |||     |     |     |
                         bindings = <
    &trans &kp EXCL  &kp AT   &kp HASH &kp DLLR &kp PRCNT     &kp CARET &kp AMPS &kp ASTRK &kp TILDE &kp BSLH &trans
-   &trans &kp MINUS &kp LBRC &kp LBKT &kp LPAR &kp UNDER     &kp EQUAL &kp RPAR &kp RBKT  &kp RBRC  &kp PLUS &trans
+   &trans &kp MINUS &kp LBRC &kp LBKT &kp LPAR &kp UNDER     &kp EQUAL &kp RPAR &kp RBKT  &kp RBRC  &kp PLUS &kp PIPE
    &trans &kp N1    &kp N2   &kp N3   &kp N4   &kp N5        &kp N6    &kp N7   &kp N8    &kp N9    &kp N0   &trans
                                      &none &trans &trans     &trans &trans &trans
                         >;
@@ -75,7 +77,7 @@
 // |  F12  |  F1  |  F2  |  F3  | F4  |  F5  |||  F6  |  F7   |   F8  |  F8  |  F10 |  F11  |
 // | BTCLR |  BT1 |  BT2 |  BT3 | BT4 |  BT5 |||  LFT |  DWN  |   UP  |  RGT | none | PSCRN |
 // |  none | none | none | HOME | END | none ||| none | PG_UP | PG_DN | none | none |  none |
-//           | none | bootloader | sys_reset ||| sys_reset | bootloader | none |
+//               | none | bootloader | reset ||| reset | bootloader | none |
                         bindings = <
    &kp F12     &kp F1       &kp F2       &kp F3       &kp F4       &kp F5           &kp F6   &kp F7    &kp F8    &kp F9    &kp F10 &kp F11
    &bt BT_CLR  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none   &kp PSCRN
@@ -85,4 +87,4 @@
                 };
 
         };
-};
+;
