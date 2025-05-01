@@ -20,8 +20,6 @@
     quick-tap-ms = <200>;
 };
 
-#define MO_TOG(layer) &mo_tog layer layer
-
 / {
 	behaviors {
 		td_upper: td_upper {
@@ -30,12 +28,11 @@
 			tapping-term-ms = <200>;
 			bindings = <&kp LSHFT>, <&kp CAPS>;
 		};
-		mo_tog: behavior_mo_tog {
-			compatible = "zmk,behavior-hold-tap";
-			#binding-cells = <2>;
-			flavor = "hold-preferred";
+		td_sym: td_sym {
+			compatible = "zmk,behavior-tap-dance";
+			#binding-cells = <0>;
 			tapping-term-ms = <200>;
-			bindings = <&mo>, <&tog>;
+			bindings = <&mo SYM>, <&tog SYM>;
 		};
 	};
         keymap {
@@ -47,12 +44,12 @@
 // |    TAB   |  Q  |  W  |  E  |  R  |  T  |||  Y  |  U  |  I  |  O  |  P  |    BSPC  |
 // | CTRL/ESC |  A  |  S  |  D  |  F  |  G  |||  H  |  J  |  K  |  L  |  ;  |  CTRL/'  |
 // |   SYS/`  |  Z  |  X  |  C  |  V  |  B  |||  N  |  M  |  ,  |  .  |  /  | ALT/RET |
-//                       | SHFT/CAPS | ALT | CMD ||| SHFT/SPC | SYM | CMD |
+//                  | ALT | CMD | SHFT/CAPS ||| SPC | SYM | CMD |
                         bindings = <
    &kp TAB        &kp Q &kp W &kp E &kp R &kp T     &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
    &mt LCTRL ESC  &kp A &kp S &kp D &kp F &kp G     &kp H &kp J  &kp K     &kp L   &kp SEMI &mt RCTRL SQT
    &lt SYS GRAVE  &kp Z &kp X &kp C &kp V &kp B     &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &mt RALT RET
-                    &td_upper &kp LALT &kp LCMD     &mt RSHFT SPC MO_TOG(SYM) &kp RCMD
+                   &kp LALT &kp LCMD  &td_upper     &kp SPC &td_sym &kp RCMD
                         >;
                 };
 
