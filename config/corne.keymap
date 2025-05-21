@@ -18,11 +18,13 @@
 #define XXX &none
 
 &lt {
-    quick-tap-ms = <200>;
+    quick-tap-ms = <300>;
+    tapping-term-ms = <500>;
 };
 
 &mt {
-    quick-tap-ms = <200>;
+    quick-tap-ms = <300>;
+    tapping-term-ms = <500>;
 };
 
 / {
