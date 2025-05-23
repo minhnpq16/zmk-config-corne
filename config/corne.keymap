@@ -20,6 +20,7 @@
 &lt {
     quick-tap-ms = <300>;
     tapping-term-ms = <500>;
+    flavor = "hold-preferred";
 };
 
 &mt {
