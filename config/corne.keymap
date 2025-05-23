@@ -26,6 +26,7 @@
 &mt {
     quick-tap-ms = <300>;
     tapping-term-ms = <500>;
+    hold-while-undecided;
 };
 
 / {
