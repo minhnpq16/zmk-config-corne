@@ -29,6 +29,10 @@
     hold-while-undecided;
 };
 
+&sk {
+    quick-release;
+};
+
 / {
 	behaviors {
 		ctrl_caps: ctrl_caps {
