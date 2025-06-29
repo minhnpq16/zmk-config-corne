@@ -10,8 +10,8 @@
 
 #define DEFAULT 0
 #define CODE 1
-#define NAV 2
-#define SYS 3
+#define SYS 2
+#define BOARD 3
 
 #define ___ &trans
 #define _ &kp
@@ -40,7 +40,7 @@
 			compatible = "zmk,behavior-mod-morph";
 			#binding-cells = <0>;
 			bindings = <&kp BACKSPACE>, <&kp DELETE>;
-			mods = <(MOD_LSFT|MOD_RSFT)>;
+			mods = <(MOD_LGUI|MOD_RGUI)>;
 		};
 		colons: colons {
 			compatible = "zmk,behavior-mod-morph";
@@ -60,26 +60,101 @@
 			bindings = <&kp SLASH>, <&kp BACKSLASH>;
 			mods = <(MOD_LSFT|MOD_RSFT)>;
 		};
-		esctab: esctab {
+		dotcom: dotcom {
 			compatible = "zmk,behavior-mod-morph";
 			#binding-cells = <0>;
-			bindings = <&kp ESC>, <&kp TAB>;
+			bindings = <&kp DOT>, <&kp COMMA>;
+			mods = <(MOD_LSFT|MOD_RSFT)>;
+		};
+		spaces: spaces {
+			compatible = "zmk,behavior-mod-morph";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE>, <&kp TAB>;
+			mods = <(MOD_LSFT|MOD_RSFT)>;
+		};
+		enter_under: enter_under {
+			compatible = "zmk,behavior-mod-morph";
+			#binding-cells = <0>;
+			bindings = <&kp ENTER>, <&kp UNDERSCORE>;
 			mods = <(MOD_LSFT|MOD_RSFT)>;
 		};
 	};
+
+	macros {
+		parens: parens {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp LPAR &kp RPAR>;
+		};
+		brackets: brackets {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp LEFT_BRACKET &kp RIGHT_BRACKET>;
+		};
+		braces: braces {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp LEFT_BRACE &kp RIGHT_BRACE>;
+		};
+		fill_parens: fill_parens {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp LPAR &kp RPAR &kp LEFT>;
+		};
+		fill_brackets: fill_brackets {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp LEFT_BRACKET &kp RIGHT_BRACKET &kp LEFT>;
+		};
+		fill_braces: fill_braces {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp LEFT_BRACE &kp RIGHT_BRACE &kp LEFT>;
+		};
+	};
+
+	#define COMBO(NAME, BINDINGS, KEYPOS) \
+		combo_##NAME { \
+			timeout-ms = <50>; \
+			require-prior-idle-ms = <100>; \
+			bindings = <BINDINGS>; \
+			key-positions = <KEYPOS>; \
+		}
+	/*╭────────────────────────┬────────────────────────╮
+	  │  0   1   2   3   4   5 │  6   7   8   9  10  11 │
+	  │ 12  13  14  15  16  17 │ 18  19  20  21  22  23 │
+	  │ 24  25  26  27  28  29 │ 30  31  32  33  34  35 │
+	  ╰───────────╮ 36  37  38 │ 39  40  41 ╭───────────╯
+		      ╰────────────┴────────────╯*/
+	combos {
+		compatible = "zmk,combos";
+		COMBO(lparen, &kp LPAR, 31 32);
+		COMBO(rparen, &kp RPAR, 32 33);
+		COMBO(parens, &parens, 31 32 33);
+		COMBO(fill_parens, &fill_parens, 31 33);
+		COMBO(lbracket, &kp LEFT_BRACKET, 19 20);
+		COMBO(rbracket, &kp RIGHT_BRACKET, 20 21);
+		COMBO(brackets, &brackets, 19 20 21);
+		COMBO(fill_brackets, &fill_brackets, 19 21);
+		COMBO(lbrace, &kp LEFT_BRACE, 7 8);
+		COMBO(rbrace, &kp RIGHT_BRACE, 8 9);
+		COMBO(braces, &braces, 7 8 9);
+		COMBO(fill_braces, &fill_braces, 7 9);
+	};
+
         keymap {
                 compatible = "zmk,keymap";
                 default_layer {
 			display-name = "Base";
                         bindings = <
 //╭────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────╮ ╭────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬─────────────────╮
-    &esctab          _ Q              _ W              _ E              _ R              _ T                _ Y              _ U              _ I              _ O              _ P              &deletes
+    XXX              _ Q              _ W              _ E              _ R              _ T                _ Y              _ U              _ I              _ O              _ P              &deletes
 //├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤ ├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼─────────────────┤
-    &sk LCTRL        _ A              _ S              _ D              _ F              _ G                _ H              _ J              _ K              _ L              &colons          &quotes
+    _ ESC            _ A              _ S              _ D              _ F              _ G                _ H              _ J              _ K              _ L              &colons          &quotes
 //├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤ ├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼─────────────────┤
-    _ GRAVE          _ Z              _ X              _ C              _ V              _ B                _ N              _ M              _ COMMA          _ DOT            _ SLASH          _ UNDERSCORE
+    XXX              _ Z              _ X              _ C              _ V              _ B                _ N              _ M              _ COMMA          _ DOT            _ SLASH          _ GRAVE
 //├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤ ├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼─────────────────┤
-                                                       &sl NAV          &sl CODE          &sk LSHFT         _ SPC            _ ENTER          _ BACKSLASH
+                                                       &mo SYS          &sl CODE         &sk LSHFT          &spaces          &enter_under     XXX
 //╰────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴────────────────╯ ╰────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴─────────────────╯
                         >;
                 };
@@ -88,34 +163,34 @@
 			display-name = "Code";
                         bindings = <
 //╭────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────╮ ╭────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬─────────────────╮
-    ___              _ EXCLAMATION    _ AT             _ HASH           _ DOLLAR         _ PERCENT          _ CARET          _ AMPERSAND      _ ASTERISK       _ LPAR           _ RPAR           ___
+    ___              _ N7             _ N5             _ N1             _ N3             _ N9               _ N8             _ N2             _ N0             _ N4             _ N6             ___
 //├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤ ├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼─────────────────┤
-    ___              _ MINUS          _ PLUS           _ LEFT_BRACKET   _ RIGHT_BRACKET  _ LESS_THAN        _ GREATER_THAN   _ LEFT_BRACE     _ RIGHT_BRACE    _ EQUAL          ___              ___
+    ___              _ MINUS          _ PLUS           _ EQUAL          _ LESS_THAN      _ GREATER_THAN     _ LEFT           _ DOWN           _ UP             _ RIGHT          ___              ___
 //├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤ ├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼─────────────────┤
-    _ TILDE          _ N1             _ N2             _ N3             _ N4             _ N5               _ N6             _ N7             _ N8             _ N9             _ N0             _ PIPE
+    ___              _ EXCLAMATION    _ AT             _ HASH           _ DOLLAR         _ PERCENT          _ CARET          _ AMPERSAND      _ ASTERISK       ___              _ BACKSLASH      ___
 //├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤ ├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼─────────────────┤
-                                                       XXX              ___              XXX                ___              ___              ___
-//╰────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴────────────────╯ ╰────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴─────────────────╯
-                        >;
-                };
-
-                navigation_layer {
-			display-name = "Navigation";
-                        bindings = <
-//╭────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────╮ ╭────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬─────────────────╮
-    &mo SYS          _ F1             _ F2             _ F3             _ F4             _ F5               _ F6             _ F7             _ F8             _ F9             _ F10            XXX
-//├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤ ├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼─────────────────┤
-    ___              &sk LSHFT        &sk LALT         &sk LCTRL        &sk LMETA        XXX                _ LEFT           _ DOWN           _ UP             _ RIGHT          XXX              _ PRINTSCREEN
-//├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤ ├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼─────────────────┤
-    XXX              XXX              XXX              _ F11            _ F12            XXX                _ HOME           _ PAGE_DOWN      _ PAGE_UP        _ END            XXX              XXX
-//├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤ ├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼─────────────────┤
-                                                       ___              XXX              XXX                XXX              XXX              XXX
+                                                       XXX              ___              ___                ___              ___              XXX
 //╰────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴────────────────╯ ╰────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴─────────────────╯
                         >;
                 };
 
                 system_layer {
 			display-name = "System";
+                        bindings = <
+//╭────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────╮ ╭────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬─────────────────╮
+    &mo BOARD        _ F1             _ F2             _ F3             _ F4             _ F5               _ F6             _ F7             _ F8             _ F9             _ F10            XXX
+//├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤ ├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼─────────────────┤
+    ___              &sk LCTRL        &sk LGUI	       &sk LALT         XXX              XXX                XXX              XXX              XXX              XXX              XXX              XXX
+//├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤ ├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼─────────────────┤
+    XXX              XXX              XXX              _ F11            _ F12            XXX                _ HOME           _ PAGE_DOWN      _ PAGE_UP        _ END            XXX              XXX
+//├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤ ├────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼─────────────────┤
+                                                       ___              XXX              ___                XXX              XXX              XXX
+//╰────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴────────────────╯ ╰────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴─────────────────╯
+                        >;
+                };
+
+                board_layer {
+			display-name = "Board";
                         bindings = <
 //╭────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────╮ ╭────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬─────────────────╮
     XXX              XXX              XXX              XXX              XXX              XXX                XXX              XXX              XXX              XXX              XXX              &bt BT_CLR
