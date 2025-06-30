@@ -99,17 +99,17 @@
 		fill_parens: fill_parens {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
-			bindings = <&kp LPAR &kp RPAR &kp ESC &kp LEFT &kp I>;
+			bindings = <&kp LPAR &kp RPAR &kp LEFT>;
 		};
 		fill_brackets: fill_brackets {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
-			bindings = <&kp LEFT_BRACKET &kp RIGHT_BRACKET &kp ESC &kp LEFT &kp I>;
+			bindings = <&kp LEFT_BRACKET &kp RIGHT_BRACKET &kp LEFT>;
 		};
 		fill_braces: fill_braces {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
-			bindings = <&kp LEFT_BRACE &kp RIGHT_BRACE &kp ESC &kp LEFT &kp I>;
+			bindings = <&kp LEFT_BRACE &kp RIGHT_BRACE &kp LEFT>;
 		};
 	};
 
@@ -128,16 +128,18 @@
 		      ╰────────────┴────────────╯*/
 	combos {
 		compatible = "zmk,combos";
-		COMBO(lparen, &kp LPAR, 31 32);
-		COMBO(rparen, &kp RPAR, 32 33);
-		COMBO(parens, &parens, 31 32 33);
-		COMBO(fill_parens, &fill_parens, 31 33);
-		COMBO(lbracket, &kp LEFT_BRACKET, 19 20);
-		COMBO(rbracket, &kp RIGHT_BRACKET, 20 21);
-		COMBO(fill_brackets, &fill_brackets, 19 21);
-		COMBO(lbrace, &kp LEFT_BRACE, 7 8);
-		COMBO(rbrace, &kp RIGHT_BRACE, 8 9);
-		COMBO(fill_braces, &fill_braces, 7 9);
+		/* COMBO(lparen, &kp LPAR, 31 32); */
+		/* COMBO(rparen, &kp RPAR, 32 33); */
+		/* COMBO(parens, &parens, 31 32 33); */
+		/* COMBO(fill_parens, &fill_parens, 31 33); */
+		/* COMBO(lbracket, &kp LEFT_BRACKET, 19 20); */
+		/* COMBO(rbracket, &kp RIGHT_BRACKET, 20 21); */
+		/* COMBO(brackets, &brackets, 31 32 33); */
+		/* COMBO(fill_brackets, &fill_brackets, 19 21); */
+		/* COMBO(lbrace, &kp LEFT_BRACE, 7 8); */
+		/* COMBO(rbrace, &kp RIGHT_BRACE, 8 9); */
+		/* COMBO(braces, &braces, 31 32 33); */
+		/* COMBO(fill_braces, &fill_braces, 7 9); */
 	};
 
         keymap {
