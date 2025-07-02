@@ -98,18 +98,27 @@
 		      ╰────────────┴────────────╯*/
 	combos {
 		compatible = "zmk,combos";
-		COMBO(lparen, &kp LPAR, 31 32);
-		COMBO(rparen, &kp RPAR, 32 33);
+
+		COMBO(lparen, _ LPAR, 31 32);
+		COMBO(rparen, _ RPAR, 32 33);
 		COMBO(parens, &parens, 31 33);
 		COMBO(fill_parens, &fill_parens, 31 32 33);
-		COMBO(lbracket, &kp LEFT_BRACKET, 19 20);
-		COMBO(rbracket, &kp RIGHT_BRACKET, 20 21);
+		COMBO(lbracket, _ LEFT_BRACKET, 19 20);
+		COMBO(rbracket, _ RIGHT_BRACKET, 20 21);
 		COMBO(brackets, &brackets, 19 21);
 		COMBO(fill_brackets, &fill_brackets, 19 20 21);
-		COMBO(lbrace, &kp LEFT_BRACE, 7 8);
-		COMBO(rbrace, &kp RIGHT_BRACE, 8 9);
+		COMBO(lbrace, _ LEFT_BRACE, 7 8);
+		COMBO(rbrace, _ RIGHT_BRACE, 8 9);
 		COMBO(braces, &braces, 7 9);
 		COMBO(fill_braces, &fill_braces, 7 8 9);
+
+		COMBO(cut, _ LG(X), 25 26);
+		COMBO(copy, _ LG(C), 26 27);
+		COMBO(paste, _ LG(V), 27 28);
+		COMBO(find, _ LG(F), 3 16);
+		COMBO(undo, _ LG(Z), 14 25);
+		COMBO(select_all, _ LG(A), 2 13);
+		COMBO(close_tab, _ LG(W), 3 17);
 	};
 
         keymap {
