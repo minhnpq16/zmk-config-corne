@@ -39,7 +39,7 @@
 		NAME: NAME { \
 			compatible = "zmk,behavior-mod-morph"; \
 			#binding-cells = <0>; \
-			bindings = <&kp NORMAL>, <&kp SHIFTED>; \
+			bindings = <_ NORMAL>, <_ SHIFTED>; \
 			mods = <(MOD_LSFT|MOD_RSFT)>; \
 		}
 	behaviors {
@@ -50,37 +50,19 @@
 		CUSTOM_SHIFT(enter_tab, ENTER, TAB);
 	};
 
+	#define MACRO(NAME, BINDINGS) \
+		NAME: NAME { \
+			compatible = "zmk,behavior-macro"; \
+			#binding-cells = <0>; \
+			bindings = <BINDINGS>; \
+		}
 	macros {
-		parens: parens {
-			compatible = "zmk,behavior-macro";
-			#binding-cells = <0>;
-			bindings = <&kp LPAR &kp RPAR>;
-		};
-		brackets: brackets {
-			compatible = "zmk,behavior-macro";
-			#binding-cells = <0>;
-			bindings = <&kp LEFT_BRACKET &kp RIGHT_BRACKET>;
-		};
-		braces: braces {
-			compatible = "zmk,behavior-macro";
-			#binding-cells = <0>;
-			bindings = <&kp LEFT_BRACE &kp RIGHT_BRACE>;
-		};
-		fill_parens: fill_parens {
-			compatible = "zmk,behavior-macro";
-			#binding-cells = <0>;
-			bindings = <&kp LPAR &kp RPAR &kp LEFT>;
-		};
-		fill_brackets: fill_brackets {
-			compatible = "zmk,behavior-macro";
-			#binding-cells = <0>;
-			bindings = <&kp LEFT_BRACKET &kp RIGHT_BRACKET &kp LEFT>;
-		};
-		fill_braces: fill_braces {
-			compatible = "zmk,behavior-macro";
-			#binding-cells = <0>;
-			bindings = <&kp LEFT_BRACE &kp RIGHT_BRACE &kp LEFT>;
-		};
+		MACRO(parens, _ LPAR _ RPAR);
+		MACRO(brackets, _ LEFT_BRACKET _ RIGHT_BRACKET);
+		MACRO(braces, _ LEFT_BRACE _ RIGHT_BRACE);
+		MACRO(fill_parens, _ LPAR _ RPAR _ LEFT);
+		MACRO(fill_brackets, _ LEFT_BRACKET _ RIGHT_BRACKET _ LEFT);
+		MACRO(fill_braces, _ LEFT_BRACE _ RIGHT_BRACE _ LEFT);
 	};
 
 	#define COMBO(NAME, BINDINGS, KEYPOS) \
