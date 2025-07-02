@@ -35,49 +35,19 @@
 
 
 / {
+	#define CUSTOM_SHIFT(NAME, NORMAL, SHIFTED) \
+		NAME: NAME { \
+			compatible = "zmk,behavior-mod-morph"; \
+			#binding-cells = <0>; \
+			bindings = <&kp NORMAL>, <&kp SHIFTED>; \
+			mods = <(MOD_LSFT|MOD_RSFT)>; \
+		}
 	behaviors {
-		deletes: deletes {
-			compatible = "zmk,behavior-mod-morph";
-			#binding-cells = <0>;
-			bindings = <&kp BACKSPACE>, <&kp DELETE>;
-			mods = <(MOD_LGUI|MOD_RGUI)>;
-		};
-		colons: colons {
-			compatible = "zmk,behavior-mod-morph";
-			#binding-cells = <0>;
-			bindings = <&kp COLON>, <&kp SEMICOLON>;
-			mods = <(MOD_LSFT|MOD_RSFT)>;
-		};
-		quotes: quotes {
-			compatible = "zmk,behavior-mod-morph";
-			#binding-cells = <0>;
-			bindings = <&kp DOUBLE_QUOTES>, <&kp SINGLE_QUOTE>;
-			mods = <(MOD_LSFT|MOD_RSFT)>;
-		};
-		slashes: slashes {
-			compatible = "zmk,behavior-mod-morph";
-			#binding-cells = <0>;
-			bindings = <&kp SLASH>, <&kp BACKSLASH>;
-			mods = <(MOD_LSFT|MOD_RSFT)>;
-		};
-		dotcom: dotcom {
-			compatible = "zmk,behavior-mod-morph";
-			#binding-cells = <0>;
-			bindings = <&kp DOT>, <&kp COMMA>;
-			mods = <(MOD_LSFT|MOD_RSFT)>;
-		};
-		spaces: spaces {
-			compatible = "zmk,behavior-mod-morph";
-			#binding-cells = <0>;
-			bindings = <&kp SPACE>, <&kp UNDERSCORE>;
-			mods = <(MOD_LSFT|MOD_RSFT)>;
-		};
-		enter_tab: enter_tab {
-			compatible = "zmk,behavior-mod-morph";
-			#binding-cells = <0>;
-			bindings = <&kp ENTER>, <&kp TAB>;
-			mods = <(MOD_LSFT|MOD_RSFT)>;
-		};
+		CUSTOM_SHIFT(colons, COLON, SEMICOLON);
+		CUSTOM_SHIFT(quotes, DOUBLE_QUOTES, SINGLE_QUOTE);
+		CUSTOM_SHIFT(dotcom, DOT, COMMA);
+		CUSTOM_SHIFT(space_under, SPACE, UNDERSCORE);
+		CUSTOM_SHIFT(enter_tab, ENTER, TAB);
 	};
 
 	macros {
