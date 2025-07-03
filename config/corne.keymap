@@ -67,7 +67,14 @@
 
 	#define COMBO(NAME, BINDINGS, KEYPOS) \
 		combo_##NAME { \
-			timeout-ms = <25>; \
+			timeout-ms = <35>; \
+			require-prior-idle-ms = <200>; \
+			bindings = <BINDINGS>; \
+			key-positions = <KEYPOS>; \
+		}
+	#define FCOMBO(NAME, BINDINGS, KEYPOS) \
+		combo_##NAME { \
+			timeout-ms = <20>; \
 			require-prior-idle-ms = <200>; \
 			bindings = <BINDINGS>; \
 			key-positions = <KEYPOS>; \
@@ -82,15 +89,15 @@
 		compatible = "zmk,combos";
 
 		COMBO(lparen, _ LPAR, 31 32);
-		COMBO(rparen, _ RPAR, 32 33);
+		FCOMBO(rparen, _ RPAR, 32 33);
 		COMBO(parens, &parens, 31 33);
 		COMBO(fill_parens, &fill_parens, 31 32 33);
 		COMBO(lbracket, _ LEFT_BRACKET, 19 20);
-		COMBO(rbracket, _ RIGHT_BRACKET, 20 21);
+		FCOMBO(rbracket, _ RIGHT_BRACKET, 20 21);
 		COMBO(brackets, &brackets, 19 21);
 		COMBO(fill_brackets, &fill_brackets, 19 20 21);
 		COMBO(lbrace, _ LEFT_BRACE, 7 8);
-		COMBO(rbrace, _ RIGHT_BRACE, 8 9);
+		FCOMBO(rbrace, _ RIGHT_BRACE, 8 9);
 		COMBO(braces, &braces, 7 9);
 		COMBO(fill_braces, &fill_braces, 7 8 9);
 
