@@ -100,7 +100,7 @@
 		COMBO(braces, &braces, 7 9);
 		COMBO(fill_braces, &fill_braces, 7 8 9);
 
-		FCOMBO(backspace, _ BACKSPACE, 15 16);
+		COMBO(backspace, _ BACKSPACE, 14 15);
 
 		COMBO(cut, _ LG(X), 25 26);
 		COMBO(copy, _ LG(C), 26 27);
