@@ -1,0 +1,125 @@
+--------------- doris_status_mapping_event ---------------------
+
+SET sink_rmq_event_aggregation_topic = 'pipo_gpn_event_aggregation';
+CREATE  TABLE sink_rmq_doris_status_mapping_event(
+            update_time             TIMESTAMP,
+            channel_payment_mode    SMALLINT NOT NULL,
+            channel_name            STRING,
+            channel_id              STRING,
+            merchant_id             STRING,
+            payment_method_id       STRING,
+            is_standardisation_flow BOOLEAN NOT NULL,
+            internal_step           STRING NOT NULL,
+            channel_method          STRING,
+            channel_endpoint        STRING,
+            channel_http_status     INT,
+            channel_status_code     STRING,
+            channel_status_message  STRING,
+            status                  STRING,
+            region                  SMALLINT NOT NULL,
+            transaction_channel_id  STRING,
+            log_id                  STRING,
+            payload_time            TIMESTAMP
+        )
+        WITH (
+            'connector' = 'rocketmq',
+            'cluster' = {{sink_rmq_aggregation_cluster}},
+            'topic' = {{sink_rmq_event_aggregation_topic}},
+            'tag' = 'doris_status_mapping_event_original',
+            'format' = 'json',
+            'sink.partition-fields' = 'update_time,channel_id,channel_status_code,channel_endpoint'
+        );
+
+
+/*SET source_rmq_channel_payload_collector_cluster = 'web_common.service.maliva';
+SET source_rmq_channel_payload_collector_topic_default = 'pipo_channel_payload_collector';
+SET source_rmq_channel_payload_collector_topic_lsite01 = 'pipo_channel_payload_collector_ls02';
+
+-- LSITE --
+CREATE  TABLE rmq_pipo_channel_payload_collector_lsite_source(
+            replica_id      STRING,
+            replica_content ROW <
+            	from_psm               STRING,
+            	channel_id             STRING,
+            	channel_name           STRING,
+            	log_id                 STRING,
+            	end_point              STRING,
+            	transaction_type       STRING,
+            	response_code          INT,
+            	http_method            STRING,
+            	response_time          BIGINT,
+            	merchant_id            STRING,
+            	transaction_channel_id STRING,
+            	external_channel_code  STRING,
+            	external_channel_msg   STRING,
+            	created_time           TIMESTAMP,
+            	truncate_time          TIMESTAMP
+            >,
+            replica_caller  BIGINT,
+            log_id          STRING
+        )
+        WITH (
+            'connector' = 'rocketmq',
+            'cluster' = {{source_rmq_channel_payload_collector_cluster}},
+            'topic' = {{source_rmq_channel_payload_collector_topic_lsite01}},
+            'group' = 'pipo_channel_payload_collector_channel_http_status_mapping_lsite_0001',
+            'tag' = 'channel_http',
+            'format' = 'json',
+            'scan.startup-mode' = 'group',
+            'scan.consumer-offset-reset-to' = 'timestamp',
+            'scan.consumer-offset-from-timestamp-millis' = '1708673511519'
+        );*/
+
+SET source_rmq_channel_payload_collector_cluster = 'web_common.service.maliva';
+SET source_rmq_channel_payload_collector_topic_default = 'pipo_channel_payload_collector';
+SET source_rmq_channel_payload_collector_topic_lsite01 = 'pipo_channel_payload_collector_ls02';
+SET source_rmq_channel_payload_collector_group_default = 'pipo_channel_payload_collector_channel_http_flink';
+SET source_rmq_channel_payload_collector_group_lsite01 = 'pipo_channel_payload_collector_channel_http_flink_lsite01';
+
+CREATE  TABLE rmq_pipo_channel_payload_collector_lsite01_source(
+            replica_id      STRING,
+            replica_content ROW <from_psm STRING, channel_id STRING, channel_name STRING, log_id STRING, end_point STRING, transaction_type STRING, response_code INT, http_method STRING, response_time BIGINT, merchant_id STRING, transaction_channel_id STRING, external_channel_code STRING, external_channel_msg STRING, created_time TIMESTAMP, truncate_time TIMESTAMP>,
+            replica_caller  BIGINT,
+            log_id          STRING
+        )
+        WITH (
+            'connector' = 'rocketmq',
+            'cluster' = {{source_rmq_channel_payload_collector_cluster}},
+            'topic' = {{source_rmq_channel_payload_collector_topic_lsite01}},  
+            'group' = 'pipo_channel_payload_collector_channel_http_flink_lsite01',
+            'tag' = 'channel_http',
+            'format' = 'json',
+            'scan.startup-mode' = 'group',
+            'scan.consumer-offset-reset-to' = 'timestamp',
+            'scan.consumer-offset-from-timestamp-millis' = '1708673511519'
+        );
+
+
+
+-- PAYOUT
+INSERT INTO sink_rmq_doris_status_mapping_event
+SELECT
+cc_oo.updated_at.after_value as update_time,
+CAST(8 AS SMALLINT) AS channel_payment_mode,
+cast('' as varchar) as channel_name,
+cast('' as varchar) as channel_id,
+cast('' as varchar) as merchant_id,
+cast('' as varchar) as payment_method_id,
+false as is_standardisation_flow,
+CAST('' AS VARCHAR) AS internal_step,
+cast('' as varchar) as channel_method,
+cast('' as varchar) as channel_endpoint,
+cast(0 as int) as channel_http_status,
+cast('' as varchar) as channel_status_code,
+cast('' as varchar) as channel_status_message,
+cast('' as varchar) as status,
+CAST({{val_region}} AS SMALLINT) AS region,
+cast('' as varchar) as transaction_channel_id,
+cast('' as varchar) as log_id,
+cast(0 as timestamp) as payload_time
+FROM    channelcore_payout_order_lsite cc_oo
+-- LEFT JOIN rmq_pipo_channel_payload_collector_lsite01_source as payload
+    -- ON  cc_oo.channel_order_id.after_value = payload.replica_content.transaction_channel_id
+    -- AND cc_oo.updated_at.after_value BETWEEN payload.created_time - INTERVAL '5' SECOND AND payload.created_time + INTERVAL '5' SECOND
+WHERE   cc_oo.order_status.after_updated
+AND     cc_oo.created_at.after_value > '2023-12-20 00:00:00';
