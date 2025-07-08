@@ -2,16 +2,16 @@ draw_config:
   key_w: 60.0
   key_h: 56.0
   split_gap: 30.0
-  combo_w: 28.0
-  combo_h: 26.0
+  combo_w: 20.0
+  combo_h: 20.0
   key_rx: 6.0
   key_ry: 6.0
   dark_mode: auto
   n_columns: 1
   separate_combo_diagrams: false
   combo_diagrams_scale: 2
-  inner_pad_w: 2.0
-  inner_pad_h: 2.0
+  inner_pad_w: 5.0
+  inner_pad_h: 5.0
   outer_pad_w: 30.0
   outer_pad_h: 56.0
   line_spacing: 1.2
@@ -36,10 +36,24 @@ draw_config:
   glyph_hold_size: 12
   glyph_shifted_size: 10
   glyphs: {}
+  glyph_urls:
+    tabler: https://unpkg.com/@tabler/icons/icons/outline/{}.svg
+    tablerf: https://unpkg.com/@tabler/icons/icons/filled/{}.svg
+    mdi: https://raw.githubusercontent.com/Templarian/MaterialDesign-SVG/master/svg/{}.svg
+    mdil: https://raw.githubusercontent.com/Pictogrammers/MaterialDesignLight/master/svg/{}.svg
+    material: https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/{}/default/48px.svg
+  use_local_cache: false
 parse_config:
   preprocess: true
   skip_binding_parsing: false
-  raw_binding_map: {}
+  raw_binding_map: {
+    "&parens": '()',
+    "&fill_parens": '(_)',
+    "&brackets": '[]',
+    "&fill_brackets": '[_]',
+    "&braces": '{}',
+    "&fill_braces": '{_}',
+  }
   sticky_label: sticky
   toggle_label: toggle
   tap_toggle_label: tap-toggle
@@ -47,7 +61,7 @@ parse_config:
     t: ▽
     type: trans
   layer_legend_map: {}
-  mark_alternate_layer_activators: true
+  mark_alternate_layer_activators: false
   modifier_fn_map:
     left_ctrl: Ctl
     right_ctrl: Ctl
@@ -197,14 +211,37 @@ parse_config:
     NON_US_HASH: '#'
     NUHS: '#'
     TILDE2: '~'
+    PAGE_UP: 'PgUp'
+    PAGE_DOWN: 'PgDn'
+    HOME: 'Home'
+    END: 'End'
+    ESC: 'Esc'
+    SPACE: $$mdi:keyboard-space$$
     BACKSPACE: $$mdi:backspace-outline$$
+    DELETE: $$mdi:backspace-reverse-outline$$
+    UP: $$mdi:arrow-up$$
+    DOWN: $$mdi:arrow-down$$
+    LEFT: $$mdi:arrow-left$$
+    RIGHT: $$mdi:arrow-right$$
+    RETURN: ⮐
+    TAB: $$mdi:keyboard-tab$$
+    LCTRL: $$mdi:apple-keyboard-control$$
+    LALT: $$mdi:apple-keyboard-option$$
+    LSHFT: $$mdi:apple-keyboard-shift$$
+    LGUI: $$mdi:apple-keyboard-command$$
   zmk_combos: {
     "combo_fill_parens": {"hidden": true},
-    "combo_parens": {"hidden": true},
+    "combo_parens": {"align": "top"},
     "combo_fill_brackets": {"hidden": true},
-    "combo_brackets": {"hidden": true},
+    "combo_brackets": {"align": "top"},
     "combo_fill_braces": {"hidden": true},
-    "combo_braces": {"hidden": true},
+    "combo_braces": {"align": "top"},
+
+    "combo_select_all":  {"dendron": true, "width": 28},
+    "combo_find":  {"dendron": true, "width": 28},
+    "combo_cut":  {"width": 28},
+    "combo_copy":  {"width": 28},
+    "combo_paste":  {"width": 28},
   }
   zmk_preamble: '#define KEYMAP_DRAWER'
   zmk_additional_includes: []
