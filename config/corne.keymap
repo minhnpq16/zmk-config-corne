@@ -88,7 +88,7 @@
 
 	#define COMBO(NAME, BINDINGS, KEYPOS) \
 		combo_##NAME { \
-			timeout-ms = <40>; \
+			timeout-ms = <50>; \
 			require-prior-idle-ms = <200>; \
 			bindings = <BINDINGS>; \
 			key-positions = <KEYPOS>; \
