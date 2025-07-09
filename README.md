@@ -2,6 +2,8 @@
 
 Alpha layout: [Dhorf](https://oxey.dev/dhorf/).
 
-![](keymap/keymap.svg)
+
+![](draw/layout.svg)
+
 
 powered by [keymap-drawer](https://github.com/caksoylar/keymap-drawer)
