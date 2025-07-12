@@ -53,6 +53,53 @@ parse_config:
     "&fill_brackets": '[_]',
     "&braces": '{}',
     "&fill_braces": '{_}',
+    "&mmv MOVE_LEFT": {
+      tap:     $$mdi:arrow-left$$,
+      shifted: $$mdi:mouse$$,
+    },
+    "&mmv MOVE_RIGHT": {
+      tap:     $$mdi:arrow-right$$,
+      shifted: $$mdi:mouse$$,
+    },
+    "&mmv MOVE_UP": {
+      tap:     $$mdi:arrow-up$$,
+      shifted: $$mdi:mouse$$,
+    },
+    "&mmv MOVE_DOWN": {
+      tap:     $$mdi:arrow-down$$,
+      shifted: $$mdi:mouse$$,
+    },
+    "&mkp LCLK": $$mdi:mouse-left-click$$,
+    "&mkp RCLK": $$mdi:mouse-right-click$$,
+    "&mkp MCLK": $$mdi:ship-wheel$$,
+    "&mkp MCLK": {
+      tap:     $$mdi:ship-wheel$$,
+      shifted: $$mdi:mouse$$,
+    },
+    "&mkp MB4": {
+      tap:     'M4',
+      shifted: $$mdi:mouse$$,
+    },
+    "&mkp MB5": {
+      tap:     'M5',
+      shifted: $$mdi:mouse$$,
+    },
+    "&msc SCRL_LEFT": {
+      tap:     $$mdi:arrow-left$$,
+      shifted: $$mdi:ship-wheel$$,
+    },
+    "&msc SCRL_RIGHT": {
+      tap:     $$mdi:arrow-right$$,
+      shifted: $$mdi:ship-wheel$$,
+    },
+    "&msc SCRL_UP": {
+      tap:     $$mdi:arrow-up$$,
+      shifted: $$mdi:ship-wheel$$,
+    },
+    "&msc SCRL_DOWN": {
+      tap:     $$mdi:arrow-down$$,
+      shifted: $$mdi:ship-wheel$$,
+    },
   }
   sticky_label: sticky
   toggle_label: toggle
