@@ -36,7 +36,7 @@
 
 &sk {
     quick-release;
-    release-after-ms = <3000>;
+    release-after-ms = <1500>;
 };
 
 
@@ -49,11 +49,10 @@
 			mods = <(MOD_LSFT|MOD_RSFT)>; \
 		}
 	behaviors {
-		CUSTOM_SHIFT(colons, COLON, SEMICOLON);
+		CUSTOM_SHIFT(semi_under, SEMICOLON, UNDERSCORE);
 		CUSTOM_SHIFT(quotes, DOUBLE_QUOTES, SINGLE_QUOTE);
 		CUSTOM_SHIFT(com_grave, COMMA, GRAVE);
 		CUSTOM_SHIFT(dot_tilde, DOT, TILDE);
-		CUSTOM_SHIFT(enter_under, ENTER, UNDERSCORE);
 
 		hrm: home_row_mod {
 			compatible = "zmk,behavior-hold-tap";
@@ -119,6 +118,8 @@
 		COMBO(fill_braces, &fill_braces, 7 8 9);
 
 		COMBO(backspace, _ BACKSPACE, 14 15);
+		COMBO(enter, _ ENTER, 2 3);
+		COMBO(tab, _ TAB, 13 14);
 
 		COMBO(cut, _ LG(X), 25 26);
 		COMBO(copy, _ LG(C), 26 27);
@@ -133,13 +134,13 @@
 			display-name = "BASE";
                         bindings = <
 //╭─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬────────────────╮ ╭─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────╮
-    XXX               _ V               _ L               _ H               _ K               _ Q                _ J               _ F               _ O               _ U               &colons           XXX
+    XXX               _ V               _ L               _ H               _ K               _ Q                _ J               _ F               _ O               _ U               &semi_under       XXX
 //├─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┼────────────────┤ ├─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┤
     &lt NAV ESC       &hrm LALT S       &hrm LCTRL R      &hrm LGUI N       &hrm LSHFT T      _ W                _ Y               _ C               _ A               _ E               _ I               &quotes
 //├─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┼────────────────┤ ├─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┤
     XXX               _ Z               _ X               _ M               _ D               _ B                _ P               _ G               &com_grave        &dot_tilde        _ SLASH           XXX
 //├─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┼────────────────┤ ├─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┤
-                                                          _ TAB             &sl CODE          &sk LSHFT          _ SPC             &enter_under      &mo NAV
+                                                          XXX               &sl CODE          &sk LSHFT          _ SPC             _ COLON           &mo NAV
 //╰─────────────────┴─────────────────┴─────────────────┴─────────────────┴─────────────────┴────────────────╯ ╰─────────────────┴─────────────────┴─────────────────┴─────────────────┴─────────────────┴─────────────────╯
                         >;
                 };
