@@ -1,8 +1,8 @@
 draw_config:
-  key_w: 60.0
-  key_h: 56.0
+  key_w: 72.0
+  key_h: 64.0
   split_gap: 30.0
-  combo_w: 20.0
+  combo_w: 24.0
   combo_h: 20.0
   key_rx: 6.0
   key_ry: 6.0
@@ -11,7 +11,7 @@ draw_config:
   separate_combo_diagrams: false
   combo_diagrams_scale: 2
   inner_pad_w: 5.0
-  inner_pad_h: 5.0
+  inner_pad_h: 8.0
   outer_pad_w: 30.0
   outer_pad_h: 56.0
   line_spacing: 1.2
@@ -263,6 +263,7 @@ parse_config:
     HOME: 'Home'
     END: 'End'
     ESC: 'Esc'
+    ENTER: ⮐
     SPACE: $$mdi:keyboard-space$$
     BACKSPACE: $$mdi:backspace-outline$$
     DELETE: $$mdi:backspace-reverse-outline$$
@@ -276,6 +277,10 @@ parse_config:
     LALT: $$mdi:apple-keyboard-option$$
     LSHFT: $$mdi:apple-keyboard-shift$$
     LGUI: $$mdi:apple-keyboard-command$$
+    RCTRL: $$mdi:apple-keyboard-control$$
+    RALT: $$mdi:apple-keyboard-option$$
+    RSHFT: $$mdi:apple-keyboard-shift$$
+    RGUI: $$mdi:apple-keyboard-command$$
   zmk_combos: {
     "combo_fill_parens": {"hidden": true},
     "combo_parens": {"align": "top"},
