@@ -1,6 +1,6 @@
 # Keymap
 
-Alpha layout: [Dhorf](https://oxey.dev/dhorf/).
+Alpha layout: modified Flare(ec0vid).
 
 
 ![](draw/keymap.svg)
